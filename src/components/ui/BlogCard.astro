@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets'
+import type { IProjectCard } from '@custom-types/types'
+
+type Props = IProjectCard
+
+const { index, image, title, pubDate, description, ctaText, projectUrl, githubUrl, demoUrl } =
+  Astro.props
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}')
+if (!images[image]) {
+  throw new Error(`"${image}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`)
+}
+---
+
+<article class="blog-card" data-animate data-animate-delay={index}>
+  <a class="blog-card__link" href={projectUrl}>
+    <Image class="blog-card__image" src={images[image]()} alt={title} />
+    <div class="blog-card__image-layer"></div>
+    <div class="blog-card__content">
+      <h3 class="blog-card__title">{title}</h3>
+      <span class="blog-card__date">{pubDate}</span>
+      <p class="blog-card__description">{description}</p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .blog-card {
+    position: relative;
+    height: 20rem;
+    width: 100%;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--rounded-sm);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+  }
+
+  .blog-card__link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: end;
+  }
+
+  .blog-card__image {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .blog-card__image-layer {
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.05), hsla(0, 0%, 0%, 0.95));
+    opacity: 1;
+    transition: all 250ms ease-in-out;
+  }
+
+  .blog-card__link:hover > .blog-card__image-layer {
+    opacity: 0.5;
+  }
+
+  .blog-card__content {
+    z-index: 3;
+    padding: 1rem;
+  }
+
+  .blog-card__title {
+    color: var(--clr-neutral-100);
+  }
+
+  .blog-card__date {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: var(--fs-200);
+    color: var(--clr-neutral-400);
+  }
+
+  .blog-card__description {
+    margin-top: 0.5rem;
+    font-size: var(--fs-300);
+    color: var(--clr-neutral-200);
+  }
+</style>

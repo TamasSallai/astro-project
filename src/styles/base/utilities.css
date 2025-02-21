@@ -1,0 +1,15 @@
+:root {
+  --rounded-sm: 4px;
+  --rounded-md: 7px;
+  --rounded-lg: 12px;
+}
+
+.rounded-sm {
+  border-radius: var(--rounded-sm);
+}
+.rounded-md {
+  border-radius: var(--rounded-md);
+}
+.rounded-lg {
+  border-radius: var(--rounded-lg);
+}

@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+import type { IProjectCard } from '@custom-types/types'
+
+type Props = IProjectCard
+
+const { index, image, title, pubDate, description, ctaText, projectUrl, githubUrl, demoUrl } =
+  Astro.props
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}')
+if (!images[image]) {
+  throw new Error(`"${image}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`)
+}
+---
+
+<article class="project-card" data-animate data-animate-delay={index}>
+  <a href={projectUrl}>
+    <Image class="project-card__image" src={images[image]()} alt={title} />
+  </a>
+  <div class="project-card__content">
+    <a href={projectUrl}>
+      <h3 class="heading-4">{title}</h3>
+    </a>
+    <span class="project-card__date">{pubDate}</span>
+    <p class="project-card__description">{description}</p>
+    <a class="project-card__link" href={projectUrl}>
+      {ctaText}
+      <Icon name="chevron-right" size={12} />
+    </a>
+    <div class="project-card__actions">
+      <a class="button button--github" href={githubUrl} target="_blank" rel="noopener noreferrer">
+        <Icon name="github" size={18} />
+        GitHub
+      </a>
+      <a class="button" href={demoUrl} target="_blank" rel="noopener noreferrer">
+        <Icon name="bolt-fill" size={18} />
+        Live Demo
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--clr-neutral-200);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--rounded-sm);
+    overflow: hidden;
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  :global([data-theme='dark']) .project-card {
+    background-color: var(--clr-neutral-950);
+  }
+
+  .project-card__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+  }
+
+  .project-card__content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .project-card__date {
+    margin-top: 0.25rem;
+    font-size: var(--fs-200);
+    color: hsl(from var(--clr-text) h s l / 0.6);
+  }
+
+  .project-card__description {
+    margin-top: 0.75rem;
+    font-size: var(--fs-300);
+  }
+
+  .project-card__link {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: var(--fs-300);
+    border-bottom: 1px solid transparent;
+    transition: all 150ms ease-in-out;
+  }
+
+  .project-card__link:hover {
+    border-bottom: 1px solid var(--clr-text);
+  }
+
+  .project-card__actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-end;
+    gap: 1rem;
+  }
+</style>

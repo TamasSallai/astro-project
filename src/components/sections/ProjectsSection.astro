@@ -1,0 +1,47 @@
+---
+import { Icon } from 'astro-icon/components'
+import type { ISection } from '@custom-types/types'
+import { useTranslations, type LangKey } from '@i18n/utils'
+import { getCollectionByLang } from '@utils/getCollectionByLang'
+import { transformProjectToCard } from '@utils/transformProjectToCard'
+import SectionHeader from '@components/SectionHeader.astro'
+import ProjectCard from '@components/ui/ProjectCard.astro'
+
+interface Props extends ISection {}
+
+const { showHeader = true } = Astro.props
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+
+const projects = await getCollectionByLang('projects', lang)
+---
+
+<section id="projects-section" class="section">
+  <div class="container">
+    {
+      showHeader && (
+        <SectionHeader align="center">
+          <Fragment slot="eyebrow">
+            <Icon name="folder-fill" />
+            {t('project-section.header.eyebrow')}
+          </Fragment>
+          <Fragment slot="title">{t('project-section.header.title')}</Fragment>
+          <Fragment slot="desc">{t('project-section.header.description')}</Fragment>
+        </SectionHeader>
+      )
+    }
+    <div class="grid-auto-fit">
+      {
+        projects
+          .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+          .map((project, index) => <ProjectCard {index} {...transformProjectToCard(project)} />)
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animateOnObserve } from '@utils/animateOnObserve'
+  animateOnObserve('#projects-section')
+</script>

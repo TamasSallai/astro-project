@@ -1,0 +1,79 @@
+@import './base/reset.css';
+@import './base/colors.css';
+@import './base/typography.css';
+@import './base/utilities.css';
+@import './layouts/container.css';
+@import './layouts/even-columns.css';
+@import './layouts/section.css';
+@import './layouts/flow.css';
+@import './layouts/grid.css';
+@import './components/button.css';
+@import './components/dropdown.css';
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--ff-base);
+  font-size: var(--fs-400);
+  font-weight: 400;
+  color: var(--clr-text);
+  background-color: var(--clr-bg);
+}
+
+main {
+  margin-top: 4rem;
+}
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(100px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+[data-animate].animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-animate-delay='1'] {
+  transition-delay: 0.1s;
+}
+[data-animate-delay='2'] {
+  transition-delay: 0.2s;
+}
+[data-animate-delay='3'] {
+  transition-delay: 0.3s;
+}
+[data-animate-delay='4'] {
+  transition-delay: 0.4s;
+}
+[data-animate-delay='5'] {
+  transition-delay: 0.5s;
+}
+[data-animate-delay='6'] {
+  transition-delay: 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    transition: none;
+  }
+}
+
+.logo-lightmode {
+  display: block;
+}
+
+.logo-darkmode {
+  display: none;
+}
+
+html[data-theme='dark'] .logo-lightmode {
+  display: none;
+}
+
+html[data-theme='dark'] .logo-darkmode {
+  display: block;
+}

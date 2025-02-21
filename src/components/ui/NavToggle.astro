@@ -1,0 +1,86 @@
+<button id="nav-toggle" aria-expanded="false">
+  <span class="nav-toggle__line"></span>
+  <span class="nav-toggle__line"></span>
+  <span class="nav-toggle__line"></span>
+</button>
+
+<script>
+  const nav = document.querySelector('#primary-nav')!
+  const navToggle = document.querySelector('#nav-toggle')!
+  const grayOverlay = document.querySelector('#grey-overlay')!
+
+  const handleClick = () => {
+    const isOpen = navToggle.getAttribute('aria-expanded')
+
+    if (isOpen === 'true') {
+      nav.setAttribute('data-visible', 'false')
+      navToggle.setAttribute('aria-expanded', 'false')
+      grayOverlay.setAttribute('data-visible', 'false')
+    } else {
+      nav.setAttribute('data-visible', 'true')
+      navToggle.setAttribute('aria-expanded', 'true')
+      grayOverlay.setAttribute('data-visible', 'true')
+    }
+  }
+
+  navToggle.addEventListener('click', handleClick)
+  grayOverlay.addEventListener('click', handleClick)
+</script>
+
+<style>
+  #nav-toggle {
+    z-index: 999;
+    display: none;
+    position: relative;
+    width: 26px;
+    height: 23px;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--clr-text);
+    border-radius: 3px;
+    transition: 0.2s ease-in-out;
+  }
+
+  span:nth-child(1) {
+    top: 0px;
+  }
+
+  span:nth-child(2) {
+    top: calc(50% - 1.5px);
+  }
+
+  span:nth-child(3) {
+    bottom: 0px;
+  }
+
+  #nav-toggle[aria-expanded='true'] span:nth-child(1) {
+    transform: rotate(45deg);
+    top: calc(50% - 1.5px);
+  }
+
+  #nav-toggle[aria-expanded='true'] span:nth-child(2) {
+    width: 0%;
+    opacity: 0;
+  }
+
+  #nav-toggle[aria-expanded='true'] span:nth-child(3) {
+    transform: rotate(-45deg);
+    bottom: calc(50% - 1.5px);
+  }
+
+  @media screen and (max-width: 960px) {
+    #nav-toggle {
+      display: block;
+    }
+  }
+</style>

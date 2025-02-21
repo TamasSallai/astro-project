@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import ProjectsSection from '@components/sections/ProjectsSection.astro'
+---
+
+<BaseLayout title="Home" description="Home">
+  <main>
+    <PageHeader>
+      <Fragment slot="title">Projects</Fragment>
+      <Fragment slot="desc">Explore and try out my latest projects.</Fragment>
+    </PageHeader>
+
+    <ProjectsSection showHeader={false} />
+  </main>
+</BaseLayout>

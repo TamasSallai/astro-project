@@ -1,0 +1,91 @@
+---
+import { Icon } from 'astro-icon/components'
+import { useTranslations, type LangKey } from '@i18n/utils'
+import FormField from './FormField.astro'
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+---
+
+<form class="contact-form">
+  <FormField
+    type="text"
+    id="name"
+    label={t('contact-form.name.label')}
+    placeholder={t('contact-form.name.placeholder')}
+    required
+  />
+  <FormField
+    type="email"
+    id="email"
+    label={t('contact-form.email.label')}
+    placeholder={t('contact-form.email.placeholder')}
+    required
+  />
+  <FormField
+    type="text"
+    id="phone"
+    label={t('contact-form.phone.label')}
+    placeholder={t('contact-form.phone.placeholder')}
+  />
+  <FormField
+    type="text"
+    id="company"
+    label={t('contact-form.company.label')}
+    placeholder={t('contact-form.company.placeholder')}
+  />
+  <FormField
+    type="textarea"
+    id="message"
+    label={t('contact-form.message.label')}
+    placeholder={t('contact-form.message.placeholder')}
+    required
+  />
+  <button class="contact-form__submit | button" type="submit">
+    {t('contact-form.submit')}
+    <Icon name="send-fill" size={16} />
+  </button>
+</form>
+
+<script>
+  const contactForm = document.querySelector('.contact-form') as HTMLFormElement
+  const submitButton = contactForm.querySelector('.contact-form__submit') as HTMLButtonElement
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const formData = new FormData(contactForm)
+    submitButton.disabled = true
+
+    try {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(true)
+        }, 3000)
+      })
+      console.log('Form submitted sucessfully')
+      console.log('Form data:', Object.fromEntries(formData))
+    } catch (error) {
+      console.error('Form submission failed:', error)
+    } finally {
+      submitButton.disabled = false
+    }
+  })
+</script>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-form__submit {
+    align-self: flex-start;
+  }
+
+  @media (max-width: 640px) {
+    .contact-form__submit {
+      align-self: stretch;
+    }
+  }
+</style>

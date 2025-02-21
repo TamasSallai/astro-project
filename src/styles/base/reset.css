@@ -1,0 +1,81 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+}
+
+:target {
+  scroll-margin-block: 5rem;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+ul[class],
+ol[class] {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+p {
+  max-width: 75ch;
+  text-wrap: pretty;
+}
+
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  font-style: italic;
+}

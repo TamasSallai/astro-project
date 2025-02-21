@@ -1,0 +1,8 @@
+.dropdown {
+  padding: 0.4rem 0.4rem;
+  font-size: 0.8rem;
+  background-color: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--rounded-sm);
+  cursor: pointer;
+}

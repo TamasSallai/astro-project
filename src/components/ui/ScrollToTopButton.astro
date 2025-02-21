@@ -1,0 +1,31 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<button id="scroll-to-top-button" class="button" data-animate aria-label="scroll to top">
+  <Icon name="chevron-up" size={22} />
+</button>
+
+<script>
+  const button = document.querySelector('#scroll-to-top-button')!
+
+  window.addEventListener('scroll', () => {
+    const scrollPosition = document.body.scrollTop || document.documentElement.scrollTop
+
+    button.classList.toggle('animate-in', scrollPosition > window.innerHeight)
+  })
+
+  button.addEventListener('click', () => {
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+  })
+</script>
+
+<style>
+  #scroll-to-top-button {
+    position: fixed;
+    bottom: 3.5rem;
+    right: 5%;
+    z-index: 1;
+  }
+</style>

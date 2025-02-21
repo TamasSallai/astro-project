@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import ContactSection from '@components/sections/ContactSection.astro'
+---
+
+<BaseLayout title="Contact" description="Contact">
+  <main>
+    <PageHeader>
+      <Fragment slot="title"> Contact </Fragment>
+      <Fragment slot="desc">
+        Have an exciting project in mind or looking for a developer to join your team? Feel free to
+        reach out, and let's create something amazing together!
+      </Fragment>
+    </PageHeader>
+    <ContactSection />
+  </main>
+</BaseLayout>

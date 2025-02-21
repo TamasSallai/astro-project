@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-icon/components'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { useTranslations, type LangKey } from '@i18n/utils'
+import HeroSwiper from '@components/ui/HeroSwiper.astro'
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+---
+
+<section class="section-lg">
+  <div class="container">
+    <div class="even-columns">
+      <div class="flow">
+        <h1 class="hero-section__heading">Hello World</h1>
+        <h1>Hello World</h1>
+        <h2>Hello World</h2>
+        <h3>Hello World</h3>
+        <h4>Hello World</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum expedita ipsum
+          deleniti ipsa. Saepe alias, distinctio optio aut hic soluta rerum! Quos aperiam laborum
+          deleniti. Iusto officiis harum adipisci alias.
+        </p>
+        <div class="hero-section__cta">
+          <a class="button" href={getRelativeLocaleUrl(lang, '/projects')}>
+            {t('nav.projects')}
+            <Icon name="folder-fill" size={16} />
+          </a>
+          <a class="button" href={getRelativeLocaleUrl(lang, '/about')}>
+            {t('nav.about')}
+            <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+      </div>
+      <div>
+        <HeroSwiper />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section__heading {
+    font-size: var(--fs-900);
+  }
+
+  .hero-section__cta {
+    display: flex;
+    gap: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero-section__cta {
+      flex-direction: column;
+    }
+  }
+</style>

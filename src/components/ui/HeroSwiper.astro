@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets'
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/hero/*.{jpeg,jpg,png,gif}')
+---
+
+<div class="swiper hero-swiper">
+  <div class="swiper-wrapper">
+    {
+      Object.values(images).map((image) => (
+        <div class="swiper-slide">
+          <Image class="slide__image" src={image()} alt="placeholder" loading={'eager'} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import Swiper from 'swiper'
+  import { Autoplay } from 'swiper/modules'
+  import 'swiper/css'
+
+  new Swiper('.hero-swiper', {
+    modules: [Autoplay],
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    grabCursor: true,
+  })
+</script>
+
+<style>
+  .slide__image {
+    height: auto;
+    object-fit: cover;
+  }
+</style>

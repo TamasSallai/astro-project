@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import ProjectsSection from '@components/sections/ProjectsSection.astro'
+---
+
+<BaseLayout title="Projektek" description="Projektek">
+  <main>
+    <PageHeader>
+      <Fragment slot="title">Projektek</Fragment>
+      <Fragment slot="desc">Fedezd fel és próbáld ki legutóbbi projektjeimet.</Fragment>
+    </PageHeader>
+
+    <ProjectsSection showHeader={false} />
+  </main>
+</BaseLayout>

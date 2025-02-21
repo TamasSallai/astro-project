@@ -1,0 +1,34 @@
+<select id="theme-select" class="dropdown" aria-label="select color theme">
+  <option value="system" selected>System</option>
+  <option value="light">Light</option>
+  <option value="dark">Dark</option>
+</select>
+
+<script is:inline>
+  const themeSelect = document.querySelector('#theme-select')
+
+  const getTheme = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme')
+    }
+    return 'system'
+  }
+
+  const setTheme = (theme) => {
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      document.documentElement.setAttribute('data-theme', systemTheme)
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+    localStorage.setItem('theme', theme)
+    themeSelect.value = theme
+  }
+
+  // Set initial theme
+  setTheme(getTheme())
+
+  themeSelect.addEventListener('change', (e) => setTheme(e.target.value))
+</script>

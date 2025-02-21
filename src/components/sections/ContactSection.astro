@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components'
+import { useTranslations, type LangKey } from '@i18n/utils'
+import ContactForm from '@components/ui/ContactForm.astro'
+import ReactContactForm from '@components/ui/ContactForm/ContactForm.tsx'
+
+const email = import.meta.env.PUBLIC_EMAIL
+const phone = import.meta.env.PUBLIC_PHONE
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+---
+
+<section class="section">
+  <div class="container">
+    <div class="contact-columns | even-columns">
+      <div class="flow">
+        <h2>{t('contact-section.heading')}</h2>
+        <p>{t('contact-section.description')}</p>
+        <ul class="contact-list">
+          <li>
+            <a class="contact-list__link" href=`mailto:${email}`>
+              <Icon name="send-fill" size={18} />{email}
+            </a>
+          </li>
+          <li>
+            <a class="contact-list__link" href=`tel:${phone}`>
+              <Icon name="telephone-fill" size={18} />{phone}
+            </a>
+          </li>
+          <li>
+            <a
+              class="contact-list__link"
+              href="https://www.linkedin.com/in/tamas-sallai"
+              target="_blank"
+            >
+              <Icon name="linkedin" size={18} />LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <!-- <ContactForm /> -->
+        <ReactContactForm lang={lang} client:load />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-columns {
+    --gap: 3rem;
+    --flow-space: 2.25rem;
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .contact-list__link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+</style>

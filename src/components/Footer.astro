@@ -1,0 +1,190 @@
+---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { useTranslations, type LangKey } from '@i18n/utils'
+import { navItems } from '@i18n/ui'
+import { isCurrentPage } from '@utils/isCurrentPage'
+import { getCollectionByLang } from '@utils/getCollectionByLang'
+import LogoLight from '@assets/logo-lightmode.svg'
+import LogoDark from '@assets/logo-darkmode.svg'
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+
+const currentYear = new Date().getFullYear()
+const currentPath = Astro.url.pathname
+
+const projects = await getCollectionByLang('projects', lang)
+
+const email = import.meta.env.PUBLIC_EMAIL
+const phone = import.meta.env.PUBLIC_PHONE
+---
+
+<footer>
+  <div class="footer__container | container">
+    <div class="grid-auto-fit">
+      <div class="footer__logo-container">
+        <a href={getRelativeLocaleUrl(lang, '/')}>
+          <Image class="logo-lightmode" src={LogoLight} alt="logo" height={40} loading="lazy" />
+          <Image class="logo-darkmode" src={LogoDark} alt="logo" height={40} loading="lazy" />
+        </a>
+      </div>
+
+      <!-- Navigation Column -->
+      <div>
+        <h4 class="footer__heading">{t('footer.navigation')}</h4>
+        <ul class="footer__list">
+          {
+            navItems.map((item) => {
+              const url = getRelativeLocaleUrl(lang, item.href)
+              return (
+                <li>
+                  <a
+                    class="footer__link"
+                    href={url}
+                    aria-current={isCurrentPage(currentPath, url) && 'page'}
+                  >
+                    {t(item.key)}
+                  </a>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
+
+      <!-- Projects Column -->
+      <div>
+        <h4 class="footer__heading">{t('footer.projects')}</h4>
+        <ul class="footer__list">
+          {
+            projects
+              .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+              .map((project) => {
+                const [lang, ...slug] = project.id.split('/')
+                const url = getRelativeLocaleUrl(lang, `/projects/${slug.join('/')}`)
+                return (
+                  <li>
+                    <a
+                      class="footer__link"
+                      href={url}
+                      aria-current={isCurrentPage(currentPath, url) && 'page'}
+                    >
+                      {project.data.title}
+                    </a>
+                  </li>
+                )
+              })
+          }
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div>
+        <h4 class="footer__heading">{t('footer.contact')}</h4>
+        <ul class="footer__list">
+          <li>
+            <a class="footer__link" href=`mailto:${email}`>
+              <Icon name="send-fill" size={18} />{email}
+            </a>
+          </li>
+          <li>
+            <a class="footer__link" href=`tel:${phone}`>
+              <Icon name="telephone-fill" size={18} />{phone}
+            </a>
+          </li>
+          <li>
+            <a class="footer__link" href="https://www.linkedin.com/in/tamas-sallai" target="_blank">
+              <Icon name="linkedin" size={18} />LinkedIn
+            </a>
+          </li>
+          <li>
+            <a class="footer__link" href="https://github.com/tamassallai" target="_blank">
+              <Icon name="github" size={18} />GitHub
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright Bar -->
+  <div class="copyright-bar">
+    <div class="copyright-bar__container | container">
+      <span class="copyright-bar__text">
+        Copyright &copy; {currentYear}
+        {t('footer.copyright')}
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    --grid-auto-fit-min-column-size: 16rem;
+    --grid-auto-fit-gap: 2rem;
+    margin-top: auto;
+    background-color: var(--clr-neutral-200);
+    border-top: 1px solid var(--clr-border);
+  }
+
+  .footer__container {
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  :global([data-theme='dark']) footer {
+    background-color: var(--clr-neutral-950);
+  }
+
+  .footer__list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .footer__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-300);
+    color: hsl(from var(--clr-text) h s l/ 0.75);
+  }
+
+  .footer__link:hover,
+  .footer__link:focus,
+  .footer__link[aria-current='page'] {
+    color: var(--clr-primary-500);
+  }
+
+  :global([data-theme='dark']) .footer__link:hover,
+  :global([data-theme='dark']) .footer__link:focus,
+  :global([data-theme='dark']) .footer__link[aria-current='page'] {
+    color: var(--clr-neutral-200);
+  }
+
+  .copyright-bar {
+    border-top: 1px solid var(--clr-border);
+  }
+
+  .copyright-bar__container {
+    padding-block: 0.75rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .copyright-bar__text {
+    font-size: 0.85rem;
+    color: hsl(from var(--clr-text) h s l/ 0.75);
+  }
+
+  @media (max-width: 640px) {
+    .footer__logo-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+</style>

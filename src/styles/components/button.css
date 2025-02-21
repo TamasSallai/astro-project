@@ -1,0 +1,42 @@
+.button {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--ff-accent);
+  font-size: var(--fs-300);
+  font-weight: 600;
+  line-height: 1.1;
+  text-wrap: nowrap;
+  color: #fff;
+  background-color: var(--clr-primary-600);
+  border: none;
+  border-radius: var(--rounded-sm);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: all 150ms ease-in-out;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--clr-primary-500);
+}
+
+.button:active {
+  background-color: var(--clr-primary-700);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button--github {
+  background-color: #24292f;
+}
+
+.button--github:hover {
+  background-color: #333a41;
+}

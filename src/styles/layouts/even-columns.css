@@ -1,0 +1,22 @@
+.even-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap, 1rem);
+}
+
+.even-columns > * {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+@media (max-width: 960px) {
+  .even-columns {
+    flex-direction: column;
+  }
+
+  .even-columns > * {
+    flex: none;
+    width: 100%;
+  }
+}

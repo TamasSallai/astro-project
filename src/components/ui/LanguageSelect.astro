@@ -1,0 +1,37 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import type { LangKey } from '@i18n/utils'
+import { languages } from '@i18n/ui'
+
+const locale = Astro.currentLocale as LangKey
+const currentPath = Astro.url.pathname
+const pathWithoutLocale = currentPath.replace(`/${locale}`, '')
+---
+
+<select id="language-select" class="dropdown" aria-label="select language">
+  {
+    Object.entries(languages).map(([key, value]) => (
+      <option
+        value={key}
+        selected={key === locale}
+        data-path={getRelativeLocaleUrl(key, pathWithoutLocale)}
+      >
+        {value}
+      </option>
+    ))
+  }
+</select>
+
+<script>
+  const languageSelect = document.querySelector('#language-select')!
+
+  languageSelect.addEventListener('change', (event) => {
+    const select = event.target as HTMLSelectElement
+    const selectedOption = select.options[select.selectedIndex]
+    const newPath = selectedOption.dataset.path
+
+    if (newPath) {
+      window.location.href = newPath
+    }
+  })
+</script>

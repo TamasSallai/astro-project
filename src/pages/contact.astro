@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import ContactSection from '@components/sections/ContactSection.astro'
+---
+
+<BaseLayout title="Kapcsolat" description="Kapcsolat">
+  <main>
+    <PageHeader>
+      <Fragment slot="title"> Kapcsolat </Fragment>
+      <Fragment slot="desc">
+        Van egy izgalmas projekt ötleted, vagy egy új emberrel erősítenéd a fejlesztői csapatod? Írj
+        bátran, és hozzunk létre valami nagyszerűt közösen!
+      </Fragment>
+    </PageHeader>
+    <ContactSection />
+  </main>
+</BaseLayout>

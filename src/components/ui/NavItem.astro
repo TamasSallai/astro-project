@@ -1,0 +1,185 @@
+---
+import { Icon } from 'astro-icon/components'
+import type { INavItem } from '@custom-types/types'
+import { isCurrentPage } from '@utils/isCurrentPage'
+
+type Props = INavItem
+
+const { href, label, submenu, isButton } = Astro.props
+
+const currentPath = Astro.url.pathname
+---
+
+<li class="nav-item" data-expanded="false">
+  <div class="nav-item__container">
+    <a
+      class={isButton ? 'nav-item__button | button' : 'nav-item__link'}
+      {href}
+      aria-current={isCurrentPage(currentPath, href) && 'page'}
+      aria-label={label}
+    >
+      {label}
+    </a>
+    {
+      submenu && (
+        <button class="nav-item__dropdown-button" aria-label={`${label} - submenu`}>
+          <Icon name="chevron-down" size={12} />
+        </button>
+      )
+    }
+  </div>
+  {
+    submenu && (
+      <div class="nav-item__dropdown-container">
+        <div>
+          <ul class="nav-item__dropdown-list">
+            {submenu.map((item) => (
+              <Astro.self {...item} />
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+</li>
+
+<script>
+  const dropDownButtons = document.querySelectorAll('.nav-item__dropdown-button')
+
+  dropDownButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation()
+      const navItem = button.closest('.nav-item')!
+      const isExpanded = navItem.getAttribute('data-expanded')
+      navItem.setAttribute('data-expanded', isExpanded === 'true' ? 'false' : 'true')
+    })
+  })
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement
+    if (!target.closest('.nav-item')) {
+      document.querySelectorAll('.nav-item[data-expanded="true"]').forEach((navItem) => {
+        navItem.setAttribute('data-expanded', 'false')
+      })
+    }
+  })
+</script>
+
+<style>
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-item__container {
+    display: flex;
+    align-items: stretch;
+    border-radius: var(--rounded-sm);
+    transition: all 150ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .nav-item__container:hover,
+  .nav-item__container:focus-within,
+  .nav-item__container:has(> [aria-current='page']) {
+    color: var(--clr-primary-600);
+    background-color: hsl(from var(--clr-primary-600) h s l / 0.2);
+  }
+
+  :global([data-theme='dark']) .nav-item__container:hover,
+  :global([data-theme='dark']) .nav-item__container:focus-within,
+  :global([data-theme='dark']) .nav-item__container:has(> [aria-current='page']) {
+    color: #fff;
+  }
+
+  .nav-item__link {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    text-wrap: pretty;
+    font-weight: 600;
+    font-size: var(--fs-300);
+    line-height: 1.1;
+  }
+
+  .nav-item__button {
+    flex: 1;
+  }
+
+  .nav-item__link:has(+ .nav-item__dropdown-button) {
+    padding: 0.75rem 0rem 0.75rem 1rem;
+  }
+
+  .nav-item__dropdown-button {
+    color: currentColor;
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Desktop dropdown */
+  @media (min-width: 960px) {
+    .nav-item__dropdown-container {
+      max-width: 16rem;
+      width: max-content;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 350ms ease;
+    }
+
+    .nav-item__dropdown-container > div {
+      margin-top: 0.4rem;
+    }
+
+    .nav-item__dropdown-list {
+      width: 100%;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: var(--clr-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: 5px;
+      box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    .nav-item:hover > .nav-item__dropdown-container,
+    .nav-item:focus-within > .nav-item__dropdown-container,
+    .nav-item[data-expanded='true'] > .nav-item__dropdown-container {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile dropdown */
+  @media (max-width: 960px) {
+    .nav-item__dropdown-container {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 250ms ease;
+    }
+
+    .nav-item[data-expanded='true'] > .nav-item__dropdown-container {
+      grid-template-rows: 1fr;
+    }
+
+    .nav-item__dropdown-container > div {
+      overflow: hidden;
+    }
+
+    .nav-item__dropdown-list {
+      margin-top: 1rem;
+      padding-left: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>

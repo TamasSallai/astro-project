@@ -1,0 +1,71 @@
+---
+interface Props {
+  type: 'text' | 'email' | 'textarea'
+  id: string
+  name?: string
+  label?: string
+  placeholder: string
+  required?: boolean
+}
+
+const { type, id, name = id, label, placeholder, required } = Astro.props
+---
+
+<div class="form-field">
+  {
+    label && (
+      <label class="form-field__label" for={id}>
+        {label}
+        {required && <span class="form-field__required">*</span>}
+      </label>
+    )
+  }
+  {
+    type === 'textarea' ? (
+      <textarea class="form-field__input" {id} {name} {name} {placeholder} {required} rows={5} />
+    ) : (
+      <input class="form-field__input" {id} {name} {type} {name} {placeholder} {required} />
+    )
+  }
+</div>
+
+<style>
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-field__label {
+    font-size: var(--fs-300);
+    font-weight: 600;
+  }
+
+  .form-field__required {
+    color: #ff5359;
+  }
+
+  .form-field__input {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--rounded-sm);
+    resize: vertical;
+  }
+
+  .form-field__input:focus-within {
+    outline: 1px solid var(--clr-primary-500);
+  }
+
+  .form-field__input::placeholder {
+    color: var(--clr-neutral-400);
+  }
+
+  :global([data-theme='dark']) .form-field__input {
+    background-color: var(--clr-neutral-950);
+  }
+
+  :global([data-theme='dark']) .form-field__input::placeholder {
+    color: var(--clr-neutral-600);
+  }
+</style>

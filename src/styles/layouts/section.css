@@ -1,0 +1,17 @@
+.section {
+  padding-block: 5rem;
+}
+
+.section-lg {
+  padding-block: 8rem;
+}
+
+@media (max-width: 960px) {
+  .section {
+    padding-block: 3.5rem;
+  }
+
+  .section-lg {
+    padding-block: 5rem;
+  }
+}

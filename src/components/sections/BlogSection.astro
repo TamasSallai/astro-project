@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components'
+import type { ISection } from '@custom-types/types'
+import { useTranslations, type LangKey } from '@i18n/utils'
+import { getCollectionByLang } from '@utils/getCollectionByLang'
+import { transformProjectToCard } from '@utils/transformProjectToCard'
+import SectionHeader from '@components/SectionHeader.astro'
+import BlogCard from '@components/ui/BlogCard.astro'
+
+interface Props extends ISection {}
+
+const { showHeader = true } = Astro.props
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+
+const blogPosts = await getCollectionByLang('projects', lang)
+---
+
+<section id="blog-section" class="section">
+  <div class="container">
+    {
+      showHeader && (
+        <SectionHeader align="center">
+          <Fragment slot="eyebrow">
+            <Icon name="newspaper-fill" />
+            {t('blog-section.header.eyebrow')}
+          </Fragment>
+          <Fragment slot="title">{t('blog-section.header.title')}</Fragment>
+          <Fragment slot="desc">{t('blog-section.header.description')} </Fragment>
+        </SectionHeader>
+      )
+    }
+    <div class="blog-grid | grid-auto-fit">
+      {
+        blogPosts
+          .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+          .map((project, index) => <BlogCard {index} {...transformProjectToCard(project)} />)
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animateOnObserve } from '@utils/animateOnObserve'
+  animateOnObserve('#blog-section')
+</script>
+
+<style>
+  .blog-grid {
+    --grid-auto-fit-min-column-size: 30rem;
+  }
+</style>

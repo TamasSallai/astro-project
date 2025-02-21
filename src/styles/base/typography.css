@@ -1,0 +1,184 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/DMSans/DMSans-VariableFont_opsz\,wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit/Outfit-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+}
+
+:root {
+  /* Font Family */
+  --ff-accent: 'Poppins', sans-serif;
+  --ff-base: 'DM Sans', sans-serif;
+
+  /* Font Sizes */
+  --fs-900: 3.25rem; /* 52px */
+  --fs-800: 2.625rem; /* 42px */
+  --fs-700: 2.25rem; /* 36px */
+  --fs-600: 1.5rem; /* 24px */
+  --fs-500: 1.25rem; /* 20px */
+  --fs-400: 1.125rem; /* 18px */
+  --fs-300: 1.05rem; /* 16.8px */
+  --fs-200: 0.925rem; /* 14.8px */
+}
+
+/* Mobile Font Size Overrides */
+@media (max-width: 768px) {
+  :root {
+    --fs-900: 2.625rem; /* 42px */
+    --fs-800: 2.25rem; /* 36px */
+    --fs-700: 1.75rem; /* 28px */
+    --fs-600: 1.25rem; /* 20px */
+    --fs-500: 1.125rem; /* 18px */
+  }
+}
+
+/* Font Size Utility Classes */
+.fs-900 {
+  font-size: var(--fs-900);
+}
+
+.fs-800 {
+  font-size: var(--fs-800);
+}
+
+.fs-700 {
+  font-size: var(--fs-700);
+}
+
+.fs-600 {
+  font-size: var(--fs-600);
+}
+
+.fs-500 {
+  font-size: var(--fs-500);
+}
+
+.fs-400 {
+  font-size: var(--fs-400);
+}
+
+.fs-300 {
+  font-size: var(--fs-300);
+}
+
+.fs-200 {
+  font-size: var(--fs-200);
+}
+
+/* Headings */
+.heading-1 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-800);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
+
+.heading-2 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-700);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
+
+.heading-3 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-600);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
+
+.heading-4 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-500);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
+
+h1 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-800);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
+
+h2 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-700);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
+
+h3 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-600);
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
+
+h4 {
+  font-family: var(--ff-accent);
+  font-size: var(--fs-500);
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--clr-heading);
+}
