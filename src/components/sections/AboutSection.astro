@@ -1,0 +1,157 @@
+---
+import { Icon } from 'astro-icon/components'
+import Image from 'astro/components/Image.astro'
+import Profile from '@assets/profile.jpg'
+---
+
+<section class="section">
+  <div class="container">
+    <div class="about-container">
+      <div class="about-container__content-column | flow">
+        <h2>Szia!</h2>
+
+        <p>
+          Sallai Tamás vagyok, egy <strong class="clr-primary-500">full-stack fejlesztő</strong> Magyarországról.
+          <strong class="clr-primary-500">Modern weboldalak</strong> és <strong
+            class="clr-primary-500">komplex webalkalmazások</strong
+          > készítésével foglalkozok.
+        </p>
+
+        <p>
+          A szoftverfejlesztés sokoldalú és számos területe érdekel. Öt éves karrierem során
+          betekintést nyertem a szoftverfejlesztés különböző területeibe, beleértve a frontend és
+          backend fejlesztést, adatbázis kezelést és rendszerek tervezést, optimalizálást.
+        </p>
+
+        <p>
+          Kisgyerek korom óta vonzottak a logikai feladványok és az olyan játékok, amelyekben
+          megélhettem a kreativitásom. Ebből következne, hogy a programozás iránt is már fiatal
+          korom óta érdeklődöm, viszont erre csak később, a 20-as éveim közepén jöttem rá.
+        </p>
+
+        <p>
+          Nagyon fontosnak tartom a <strong class="clr-primary-500">jó kódminőséget</strong>, és
+          sokat dolgozok azért, hogy a munka amit kiadok a kezeim közül magas minőségett hozzon.
+          Jelentsen ez egy <strong class="clr-primary-500"
+            >reszponzív, akadálymentes weboldalt
+          </strong>, vagy egy <strong class="clr-primary-500">optimalizált folyamatot</strong>.
+        </p>
+      </div>
+      <div class="about-container__image-column">
+        <Image class="about-container__image" src={Profile} alt="placeholder" />
+      </div>
+    </div>
+
+    <div class="collab-container">
+      <div class="collab-container__image-column">
+        <Icon name="sitepro" size="100%" />
+      </div>
+      <div class="collab-container__content-column | flow">
+        <h2>Kollaborációk</h2>
+        <p>
+          2025 elejétől másodállásban <strong class="clr-primary-500"
+            >vállalkozóként is dolgozom.</strong
+          >
+        </p>
+        <p>
+          A saját projektjeim és főállású munkám mellett együttműködöm barátaimmal, a <strong
+            class="clr-primary-500">SitePro</strong
+          >
+          csapatával.
+        </p>
+        <p>
+          A munkám során kész designok alapján készítek
+          <strong class="clr-primary-500"
+            >reszponzív, felhasználóbarát és technológiailag korszerű</strong
+          > weboldalakat, webes megoldásokat. Ezen kívül foglalkozom még weblapoptimalizálással, új funkciók
+          fejlesztésével és karbantartási feladatokkal.
+        </p>
+        <p>
+          Ha kíváncsi milyen projekteken dolgoztam együtt a SitePro-val, akkor <a
+            class="link"
+            href="/">olvasd el az erről szóló blog cikkemet!</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-container {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .about-container__content-column {
+    flex: 2;
+  }
+
+  .about-container__image-column {
+    flex: 1;
+  }
+
+  .about-container__image {
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--rounded-lg);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .collab-container {
+    margin-top: 4rem;
+    display: flex;
+    gap: 3rem;
+  }
+
+  .collab-container__image-column {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .collab-container__content-column {
+    flex: 2;
+  }
+
+  .clr-primary-500 {
+    color: var(--clr-primary-500);
+  }
+
+  .link {
+    text-decoration: underline;
+    text-decoration-color: var(--clr-primary-500);
+  }
+
+  .link:hover {
+    color: var(--clr-primary-500);
+  }
+
+  @media (max-width: 960px) {
+    .about-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .about-container__image-column {
+      max-width: 30rem;
+      width: 100%;
+    }
+
+    .collab-container {
+      margin-top: 3rem;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .collab-container__image-column {
+      max-width: 30rem;
+      width: 100%;
+    }
+  }
+</style>
