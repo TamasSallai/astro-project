@@ -67,7 +67,7 @@ export const ui = {
   hu: {
     // Navigation
     'nav.home': 'Főoldal',
-    'nav.about': 'Rólunk',
+    'nav.about': 'Bemutatkozás',
     'nav.blog': 'Blog',
     'nav.projects': 'Projektek',
     'nav.contact': 'Kapcsolat',
