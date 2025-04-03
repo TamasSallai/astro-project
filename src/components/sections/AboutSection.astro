@@ -44,7 +44,7 @@ import Profile from '@assets/profile.jpg'
 
     <div class="collab-container">
       <div class="collab-container__image-column">
-        <Icon name="sitepro" size="100%" />
+        <Icon class="collab-container__image" name="sitepro" size="100%" />
       </div>
       <div class="collab-container__content-column | flow">
         <h2>Kollaborációk</h2>
@@ -128,6 +128,14 @@ import Profile from '@assets/profile.jpg'
 
   .link:hover {
     color: var(--clr-primary-500);
+  }
+
+  :global([data-theme='dark']) [data-icon='sitepro'] {
+    color: var(--clr-neutral-100);
+  }
+
+  :global([data-theme='light']) [data-icon='sitepro'] {
+    color: var(--clr-neutral-900);
   }
 
   @media (max-width: 960px) {
