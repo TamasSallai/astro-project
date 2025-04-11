@@ -1,44 +1,29 @@
 ---
 import { Icon } from 'astro-icon/components'
+import { useTranslations, type LangKey } from '@i18n/utils'
 import Image from 'astro/components/Image.astro'
 import Profile from '@assets/profile.jpg'
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
 ---
 
-<section class="section">
+<section class="about-section">
   <div class="container">
-    <div class="about-container">
-      <div class="about-container__content-column | flow">
-        <h2>Szia!</h2>
+    <div class="intro-container">
+      <div class="intro-container__content-column | flow">
+        <h2>{t('about-section.intro.title')}</h2>
 
-        <p>
-          Sallai Tamás vagyok, egy <strong class="clr-primary-500">full-stack fejlesztő</strong> Magyarországról.
-          <strong class="clr-primary-500">Modern weboldalak</strong> és <strong
-            class="clr-primary-500">komplex webalkalmazások</strong
-          > készítésével foglalkozok.
-        </p>
+        <p set:html={t('about-section.intro.p1')} />
 
-        <p>
-          A szoftverfejlesztés sokoldalú és számos területe érdekel. Öt éves karrierem során
-          betekintést nyertem a szoftverfejlesztés különböző területeibe, beleértve a frontend és
-          backend fejlesztést, adatbázis kezelést és rendszerek tervezést, optimalizálást.
-        </p>
+        <p>{t('about-section.intro.p2')}</p>
 
-        <p>
-          Kisgyerek korom óta vonzottak a logikai feladványok és az olyan játékok, amelyekben
-          megélhettem a kreativitásom. Ebből következne, hogy a programozás iránt is már fiatal
-          korom óta érdeklődöm, viszont erre csak később, a 20-as éveim közepén jöttem rá.
-        </p>
+        <p>{t('about-section.intro.p3')}</p>
 
-        <p>
-          Nagyon fontosnak tartom a <strong class="clr-primary-500">jó kódminőséget</strong>, és
-          sokat dolgozok azért, hogy a munka amit kiadok a kezeim közül magas minőségett hozzon.
-          Jelentsen ez egy <strong class="clr-primary-500"
-            >reszponzív, akadálymentes weboldalt
-          </strong>, vagy egy <strong class="clr-primary-500">optimalizált folyamatot</strong>.
-        </p>
+        <p set:html={t('about-section.intro.p4')} />
       </div>
-      <div class="about-container__image-column">
-        <Image class="about-container__image" src={Profile} alt="placeholder" />
+      <div class="intro-container__image-column">
+        <Image class="intro-container__image" src={Profile} alt="placeholder" loading="eager" />
       </div>
     </div>
 
@@ -47,51 +32,39 @@ import Profile from '@assets/profile.jpg'
         <Icon class="collab-container__image" name="sitepro" size="100%" />
       </div>
       <div class="collab-container__content-column | flow">
-        <h2>Kollaborációk</h2>
-        <p>
-          2025 elejétől másodállásban <strong class="clr-primary-500"
-            >vállalkozóként is dolgozom.</strong
-          >
-        </p>
-        <p>
-          A saját projektjeim és főállású munkám mellett együttműködöm barátaimmal, a <strong
-            class="clr-primary-500">SitePro</strong
-          >
-          csapatával.
-        </p>
-        <p>
-          A munkám során kész designok alapján készítek
-          <strong class="clr-primary-500"
-            >reszponzív, felhasználóbarát és technológiailag korszerű</strong
-          > weboldalakat, webes megoldásokat. Ezen kívül foglalkozom még weblapoptimalizálással, új funkciók
-          fejlesztésével és karbantartási feladatokkal.
-        </p>
-        <p>
-          Ha kíváncsi milyen projekteken dolgoztam együtt a SitePro-val, akkor <a
-            class="link"
-            href="/">olvasd el az erről szóló blog cikkemet!</a
-          >
-        </p>
+        <h2>{t('about-section.collab.title')}</h2>
+        <p set:html={t('about-section.collab.p1')} />
+
+        <p set:html={t('about-section.collab.p2')} />
+
+        <p set:html={t('about-section.collab.p3')} />
+
+        <p set:html={t('about-section.collab.p4')} />
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .about-container {
+  .about-section {
+    padding-top: 5rem;
+    padding-bottom: 10rem;
+  }
+
+  .intro-container {
     display: flex;
     gap: 3rem;
   }
 
-  .about-container__content-column {
+  .intro-container__content-column {
     flex: 2;
   }
 
-  .about-container__image-column {
+  .intro-container__image-column {
     flex: 1;
   }
 
-  .about-container__image {
+  .intro-container__image {
     height: 100%;
     object-fit: cover;
     border: 1px solid var(--clr-border);
@@ -117,10 +90,6 @@ import Profile from '@assets/profile.jpg'
     flex: 2;
   }
 
-  .clr-primary-500 {
-    color: var(--clr-primary-500);
-  }
-
   .link {
     text-decoration: underline;
     text-decoration-color: var(--clr-primary-500);
@@ -139,13 +108,13 @@ import Profile from '@assets/profile.jpg'
   }
 
   @media (max-width: 960px) {
-    .about-container {
+    .intro-container {
       flex-direction: column;
       align-items: center;
       gap: 2rem;
     }
 
-    .about-container__image-column {
+    .intro-container__image-column {
       max-width: 30rem;
       width: 100%;
     }

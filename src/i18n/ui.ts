@@ -1,3 +1,4 @@
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import type { UILangKey } from './utils'
 
 export const languages = {
@@ -6,6 +7,8 @@ export const languages = {
 } as const
 
 export const defaultLang = 'hu'
+
+const EnglishBlogUrl = getRelativeLocaleUrl('en', '/blog')
 
 export const ui = {
   en: {
@@ -63,6 +66,26 @@ export const ui = {
     'not-found-section.description':
       'Unfortunately, this page cannot be found. It may have been removed, its name may have changed, or it might be temporarily unavailable.',
     'not-found-section.back': 'Back to Homepage',
+
+    // About Section
+    'about-section.intro.title': 'Hello',
+    'about-section.intro.p1':
+      'My name is Tamás Sallai, and I’m a <strong class="clr-primary-500">Full-Stack Developer</strong> from Hungary. I build <strong class="clr-primary-500">modern websites</strong> and <strong class="clr-primary-500">complex web applications</strong>.',
+    'about-section.intro.p2':
+      'Software development is a diverse field, and I’m interested in many aspects of it. Over the past five years, I’ve gained experience in various areas, including frontend and backend development, database management, system design, and performance optimization.',
+    'about-section.intro.p3':
+      'Since I was a kid, I’ve been drawn to logic puzzles and games that let me express my creativity. You might think this means I’ve always been into programming, but I only discovered my passion for it in my mid-twenties.',
+    'about-section.intro.p4':
+      'I care a lot about writing <strong class="clr-primary-500">good-quality code</strong> and always work hard to ensure my work meets a high standard. Whether it’s a <strong class="clr-primary-500">responsive, accessible websites</strong> or a <strong class="clr-primary-500">well-optimized system </strong>, I put in the effort to make sure it’s reliable and performant.',
+
+    'about-section.collab.title': 'Collaborations',
+    'about-section.collab.p1':
+      'Since the beginning of 2025, I’ve also been <strong class="clr-primary-500">working as a freelancer</strong> alongside my full-time job',
+    'about-section.collab.p2':
+      'In addition to my own projects and full-time work, I collaborate with my friends at the <strong class="clr-primary-500">SitePro</strong> team.',
+    'about-section.collab.p3':
+      'In my work, i build responsive, user-friendly and modern websites and web solutions based on figma designs. I also handle website optimization, develop new features, and take care of maintenance tasks.',
+    'about-section.collab.p4': `If you intrested in the projects I worked on with SitePro, feel free to <a class="link" href=${EnglishBlogUrl}>check out my blog post about it!</strong>`,
   },
   hu: {
     // Navigation
@@ -120,6 +143,26 @@ export const ui = {
     'not-found-section.description':
       'Sajnos ez az oldal nem található. Lehetséges, hogy az oldalt eltávolítottuk, megváltozott a neve, vagy ideiglenesen nem elérhető.',
     'not-found-section.back': 'Vissza a főoldalra',
+
+    // About Section
+    'about-section.intro.title': 'Szia!',
+    'about-section.intro.p1':
+      'Sallai Tamás vagyok, egy <strong class="clr-primary-500">Full-Stack fejlesztő</strong> Magyarországról. <strong class="clr-primary-500">Modern weboldalak</strong> és <strong class="clr-primary-500">komplex webalkalmazások</strong> készítésével foglalkozok.',
+    'about-section.intro.p2':
+      'A szoftverfejlesztés sokoldalú és számos területe érdekel. Öt éves karrierem során betekintést nyertem a szoftverfejlesztés különböző területeibe, beleértve a frontend és backend fejlesztést, adatbázis kezelést és rendszerek tervezést, optimalizálást.',
+    'about-section.intro.p3':
+      ' Kisgyerek korom óta vonzottak a logikai feladványok és az olyan játékok, amelyekben megélhettem a kreativitásom. Ebből következne, hogy a programozás iránt is már fiatal korom óta érdeklődöm, viszont erre csak később, a 20-as éveim közepén jöttem rá.',
+    'about-section.intro.p4':
+      ' Nagyon fontosnak tartom a <strong class="clr-primary-500">jó kódminőséget</strong>, és sokat dolgozok azért, hogy a munka amit kiadok a kezeim közül magas minőségett hozzon. Jelentsen ez egy <strong class="clr-primary-500">reszponzív, akadálymentes weboldalt</strong>, vagy egy <strong class="clr-primary-500">optimalizált folyamatot</strong>.',
+    'about-section.collab.title': 'Kollaborációk',
+    'about-section.collab.p1':
+      '2025 elejétől másodállásban <strong class="clr-primary-500">vállalkozóként is dolgozom.</strong>',
+    'about-section.collab.p2':
+      'A saját projektjeim és főállású munkám mellett együttműködöm barátaimmal, a <strong class="clr-primary-500">SitePro</strong> csapatával.',
+    'about-section.collab.p3':
+      'A munkám során kész figma designok alapján készítek <strong class="clr-primary-500">reszponzív, felhasználóbarát és technológiailag korszerű</strong> weboldalakat, webes megoldásokat. Ezen kívül foglalkozom még weblapoptimalizálással, új funkciók fejlesztésével és karbantartási feladatokkal.',
+    'about-section.collab.p4':
+      'Ha kíváncsi milyen projekteken dolgoztam együtt a SitePro-val, akkor <a class="link" href="/blog">olvasd el az erről szóló blog cikkemet!</a>',
   },
 } as const
 
