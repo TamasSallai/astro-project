@@ -175,10 +175,7 @@ export interface I18nNavItem {
 export const navItems: I18nNavItem[] = [
   { key: 'nav.home', href: '/' },
   { key: 'nav.about', href: '/about' },
-  {
-    key: 'nav.projects',
-    href: '/projects',
-  },
+  { key: 'nav.projects', href: '/projects' },
   { key: 'nav.blog', href: '/blog' },
   { key: 'nav.contact', href: '/contact' },
 ]
