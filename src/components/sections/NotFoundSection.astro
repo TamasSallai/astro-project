@@ -1,6 +1,7 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import { useTranslations, type LangKey } from '@i18n/utils'
+import { Icon } from 'astro-icon/components'
 
 const lang = Astro.currentLocale as LangKey
 const t = useTranslations(lang)
@@ -11,7 +12,7 @@ const t = useTranslations(lang)
     <div class="not-found__container">
       <h1 class="heading-2">{t('not-found-section.title')}</h1>
       <p class="not-found__desc">{t('not-found-section.description')}</p>
-      <a class="not-found__back | button">
+      <a class="not-found__back | button" href={getRelativeLocaleUrl(lang, '/')}>
         <Icon name="chevron-left" size={16} />{t('not-found-section.back')}
       </a>
     </div>
