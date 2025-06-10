@@ -29,14 +29,23 @@ const ContactForm = ({ lang }: Props) => {
 
   const t = useTranslations(lang)
 
+  const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
+
   const onSubmit = async (data: IContactFormData) => {
     try {
+      const recaptcha = await grecaptcha.execute(siteKey, {
+        action: 'contact_form',
+      })
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          recaptcha,
+        }),
       })
 
       if (!response.ok) {
@@ -47,6 +56,8 @@ const ContactForm = ({ lang }: Props) => {
       await response.json()
       reset()
     } catch (error) {
+      console.log(error)
+
       setError('root', {}) // Empty object, no message needed
     }
   }
@@ -114,7 +125,7 @@ const ContactForm = ({ lang }: Props) => {
       {isSubmitSuccessful && <p className="contact-form__success">{t('contact-form.success')}</p>}
       {errors.root && <p className="contact-form__error">{t('contact-form.error')}</p>}
 
-      <button className="contact-form__submit | button" disabled={isSubmitting}>
+      <button className="grecaptcha contact-form__submit | button" disabled={isSubmitting}>
         {t('contact-form.submit')}{' '}
         {isSubmitting ? <span className="contact-form__loader"></span> : <SendIcon />}
       </button>
