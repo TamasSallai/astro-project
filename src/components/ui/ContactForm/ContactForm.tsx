@@ -1,9 +1,10 @@
-import { useForm } from 'react-hook-form'
-import type { IContactFormFields } from '@custom-types/types'
-import { useTranslations, type LangKey } from '@i18n/utils'
-import SendIcon from '@icons/send-fill'
-import FormField from '../FormField/FormField'
 import './ContactForm.css'
+
+import { useForm } from 'react-hook-form'
+import { useTranslations, type LangKey } from '@i18n/utils'
+import type { IContactFormData } from '@custom-types/types'
+import FormField from '../FormField/FormField'
+import SendIcon from '@icons/send-fill'
 
 interface Props {
   lang: LangKey
@@ -13,8 +14,10 @@ const ContactForm = ({ lang }: Props) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
-  } = useForm<IContactFormFields>({
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    setError,
+    reset,
+  } = useForm<IContactFormData>({
     defaultValues: {
       name: '',
       email: '',
@@ -26,18 +29,25 @@ const ContactForm = ({ lang }: Props) => {
 
   const t = useTranslations(lang)
 
-  const onSubmit = async (data: IContactFormFields) => {
-    console.log('Sending request...')
-
+  const onSubmit = async (data: IContactFormData) => {
     try {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true)
-        }, 3000)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       })
-      console.log('Request resolved successfully')
+
+      if (!response.ok) {
+        setError('root', {}) // Empty object, no message needed
+        return
+      }
+
+      await response.json()
+      reset()
     } catch (error) {
-      console.error('Form submission failed:', error)
+      setError('root', {}) // Empty object, no message needed
     }
   }
 
@@ -100,6 +110,10 @@ const ContactForm = ({ lang }: Props) => {
         })}
         fieldError={errors.message}
       />
+
+      {isSubmitSuccessful && <p className="contact-form__success">{t('contact-form.success')}</p>}
+      {errors.root && <p className="contact-form__error">{t('contact-form.error')}</p>}
+
       <button className="contact-form__submit | button" disabled={isSubmitting}>
         {t('contact-form.submit')}{' '}
         {isSubmitting ? <span className="contact-form__loader"></span> : <SendIcon />}

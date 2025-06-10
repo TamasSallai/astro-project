@@ -10,6 +10,7 @@ import react from '@astrojs/react'
 export default defineConfig({
   integrations: [icon(), react()],
   site: 'https://example.com',
+  output: 'server',
   i18n: {
     locales: ['hu', 'en'],
     defaultLocale: 'hu',

@@ -10,6 +10,8 @@ export const defaultLang = 'hu'
 
 const EnglishBlogUrl = getRelativeLocaleUrl('en', '/blog')
 
+const email = import.meta.env.PUBLIC_EMAIL
+
 export const ui = {
   en: {
     // Navigation
@@ -60,6 +62,8 @@ export const ui = {
     'contact-form.message.label': 'Message',
     'contact-form.message.placeholder': 'Tell me how can i help you.',
     'contact-form.submit': 'Send',
+    'contact-form.success': "Thanks for reaching out! I'll be in touch shortly.",
+    'contact-form.error': `An unexpected error occurred. Please contact me directly at ${email}`,
 
     // Not Found Section
     'not-found-section.title': '404 | Page not found.',
@@ -137,6 +141,8 @@ export const ui = {
     'contact-form.message.label': 'Üzenet',
     'contact-form.message.placeholder': 'Mondd el, miben segíthetek.',
     'contact-form.submit': 'Küldés',
+    'contact-form.success': 'Köszönöm, hogy felvette velem a kapcsolatot! Hamarosan jelentkezem.',
+    'contact-form.error': `Váratlan hiba történt. Kérem írjon közvetlenül a ${email} email címre.`,
 
     // Not Found Section
     'not-found-section.title': '404 | Az oldal nem található.',
