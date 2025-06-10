@@ -3,6 +3,8 @@ import { render } from 'astro:content'
 import { getCollectionByLang } from '@utils/getCollectionByLang'
 import ProjectLayout from '@layouts/ProjectLayout.astro'
 
+export const prerender = true
+
 export const getStaticPaths = async () => {
   const projects = await getCollectionByLang('projects', 'hu')
   return projects.map((project) => {
