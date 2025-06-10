@@ -3,18 +3,24 @@ import { Icon } from 'astro-icon/components'
 import type { ISection } from '@custom-types/types'
 import { useTranslations, type LangKey } from '@i18n/utils'
 import { getCollectionByLang } from '@utils/getCollectionByLang'
-import { transformProjectToCard } from '@utils/transformProjectToCard'
 import SectionHeader from '@components/SectionHeader.astro'
 import ProjectCard from '@components/ui/ProjectCard.astro'
 
-interface Props extends ISection {}
+type Props = ISection
 
 const { showHeader = true } = Astro.props
 
 const lang = Astro.currentLocale as LangKey
 const t = useTranslations(lang)
 
-const projects = await getCollectionByLang('projects', lang)
+const projectsCollectionEntries = await getCollectionByLang('projects', lang)
+const projectsCards = projectsCollectionEntries.map(({ id, data }) => {
+  const [_lang, ...slug] = id.split('/')
+  return {
+    slug: slug.join('/'),
+    ...data,
+  }
+})
 ---
 
 <section id="projects-section" class="section">
@@ -33,9 +39,9 @@ const projects = await getCollectionByLang('projects', lang)
     }
     <div class="grid-auto-fit">
       {
-        projects
-          .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-          .map((project, index) => <ProjectCard {index} {...transformProjectToCard(project)} />)
+        projectsCards
+          .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
+          .map((project, index) => <ProjectCard {index} {...project} />)
       }
     </div>
   </div>

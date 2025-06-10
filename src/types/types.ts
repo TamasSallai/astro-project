@@ -13,14 +13,22 @@ export interface INavItem {
 
 export interface IProjectCard {
   index?: number
+  slug: string
   image: string
   title: string
   description: string
-  ctaText: string
-  projectUrl: string
   githubUrl: string
   demoUrl: string
-  pubDate: string
+  pubDate: Date
+}
+
+export interface IBlogCard {
+  index?: number
+  slug: string
+  image: string
+  title: string
+  description: string
+  pubDate: Date
 }
 
 export interface ITOCHeading extends MarkdownHeading {

@@ -1,25 +1,28 @@
 ---
 import { Image } from 'astro:assets'
-import type { IProjectCard } from '@custom-types/types'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { formatDate, type LangKey } from '@i18n/utils'
+import type { IBlogCard } from '@custom-types/types'
 
-type Props = IProjectCard
+type Props = IBlogCard
 
-const { index, image, title, pubDate, description, ctaText, projectUrl, githubUrl, demoUrl } =
-  Astro.props
+const { index, slug, image, title, pubDate, description } = Astro.props
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}')
 if (!images[image]) {
   throw new Error(`"${image}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`)
 }
+
+const lang = Astro.currentLocale as LangKey
 ---
 
 <article class="blog-card" data-animate data-animate-delay={index}>
-  <a class="blog-card__link" href={projectUrl}>
+  <a class="blog-card__link" href={getRelativeLocaleUrl(lang, `/blog/${slug}`)}>
     <Image class="blog-card__image" src={images[image]()} alt={title} />
     <div class="blog-card__image-layer"></div>
     <div class="blog-card__content">
       <h3 class="blog-card__title">{title}</h3>
-      <span class="blog-card__date">{pubDate}</span>
+      <span class="blog-card__date">{formatDate(pubDate, lang)}</span>
       <p class="blog-card__description">{description}</p>
     </div>
   </a>

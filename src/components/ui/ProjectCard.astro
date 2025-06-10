@@ -1,17 +1,23 @@
 ---
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { formatDate, useTranslations, type LangKey } from '@i18n/utils'
 import type { IProjectCard } from '@custom-types/types'
 
 type Props = IProjectCard
 
-const { index, image, title, pubDate, description, ctaText, projectUrl, githubUrl, demoUrl } =
-  Astro.props
+const { index, slug, image, pubDate, title, description, githubUrl, demoUrl } = Astro.props
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}')
 if (!images[image]) {
   throw new Error(`"${image}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`)
 }
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+
+const projectUrl = getRelativeLocaleUrl(lang, `/projects/${slug}`)
 ---
 
 <article class="project-card" data-animate data-animate-delay={index}>
@@ -22,10 +28,10 @@ if (!images[image]) {
     <a href={projectUrl}>
       <h3 class="heading-4">{title}</h3>
     </a>
-    <span class="project-card__date">{pubDate}</span>
+    <span class="project-card__date">{formatDate(pubDate, lang)}</span>
     <p class="project-card__description">{description}</p>
     <a class="project-card__link" href={projectUrl}>
-      {ctaText}
+      {t('project-card.cta')}
       <Icon name="chevron-right" size={12} />
     </a>
     <div class="project-card__actions">

@@ -4,7 +4,7 @@ title: Második Projekt
 description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto soluta distinctio et voluptas ipsum tempora est amet, nisi reprehenderit.
 demoUrl: 'https://github.com/TamasSallai'
 githubUrl: 'https://github.com/TamasSallai'
-pubDate: '2024-10-02'
+pubDate: '2025-06-02'
 author:
   {
     firstName: 'Tamás',

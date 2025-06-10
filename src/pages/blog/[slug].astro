@@ -1,0 +1,23 @@
+---
+import { render } from 'astro:content'
+import { getCollectionByLang } from '@utils/getCollectionByLang'
+import BlogLayout from '@layouts/BlogLayout.astro'
+
+export const getStaticPaths = async () => {
+  const blogCollectionEntries = await getCollectionByLang('blog', 'hu')
+  return blogCollectionEntries.map((blog) => {
+    const [lang, ...slug] = blog.id.split('/')
+    return {
+      params: { lang, slug: slug.join('/') },
+      props: { blog },
+    }
+  })
+}
+
+const { blog } = Astro.props
+const { Content, headings } = await render(blog)
+---
+
+<BlogLayout headings={headings} data={blog.data}>
+  <Content />
+</BlogLayout>

@@ -1,0 +1,139 @@
+---
+import type { MarkdownHeading } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { formatDate, type LangKey } from '@i18n/utils'
+import BaseLayout from './BaseLayout.astro'
+import TOC from '@components/ui/TOC.astro'
+
+type Props = {
+  headings: MarkdownHeading[]
+  data: CollectionEntry<'blog'>['data']
+}
+
+const { headings, data } = Astro.props
+const { title, description, image, pubDate } = data
+
+const lang = Astro.currentLocale as LangKey
+---
+
+<BaseLayout {title} {description} {image}>
+  <main>
+    <header class="article-header">
+      <div class="container">
+        <h2 class="article-header__eyebrow">Blog</h2>
+        <h1 class="article-header__title">{title}</h1>
+        <span class="article-header__date">{formatDate(pubDate, lang)}</span>
+      </div>
+    </header>
+    <div class="article-main | container">
+      <article class="article-content">
+        <slot />
+      </article>
+      <nav class="article-nav">
+        <TOC headings={headings} />
+      </nav>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const observer = new IntersectionObserver((sections) => {
+    sections.forEach((section) => {
+      const heading = section.target.querySelector('h1, h2, h3, h4')
+      if (!heading) return
+
+      const headingId = heading.getAttribute('id')
+      const tocLink = document.querySelector(`nav.toc a[href="#${headingId}"]`)
+      if (!tocLink) return
+
+      if (section.isIntersecting) {
+        tocLink.classList.add('active')
+      } else {
+        tocLink.classList.remove('active')
+      }
+    })
+  })
+
+  const sections = document.querySelectorAll('.article-content section')
+
+  sections.forEach((section) => {
+    observer.observe(section)
+  })
+</script>
+
+<style is:global>
+  .article-header {
+    padding-block: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--clr-neutral-200);
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  html[data-theme='dark'] .article-header {
+    background-color: var(--clr-neutral-950);
+  }
+
+  .article-header__eyebrow {
+    font-size: var(--fs-600);
+    color: hsl(from var(--clr-text) h s l / 0.75);
+  }
+
+  .article-header__title {
+    margin-top: 0.75rem;
+    font-size: var(--fs-800);
+  }
+
+  .article-header__date {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: var(--fs-200);
+    color: hsl(from var(--clr-text) h s l / 0.75);
+  }
+
+  .article-header__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+  }
+
+  .article-main {
+    padding-block: 3.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .article-nav {
+    position: sticky;
+    top: 5rem;
+    width: 18rem;
+  }
+
+  .article-content :is(h1, h2, h3, h4) {
+    margin-block-start: 0.75em;
+  }
+
+  .article-content p {
+    margin-block-start: 0.6em;
+  }
+
+  .article-content > :first-child,
+  .article-content > section:first-child > :first-child {
+    margin-block-start: 0;
+  }
+  @media (max-width: 960px) {
+    .article-main {
+      flex-direction: column-reverse;
+    }
+
+    .article-nav {
+      position: static;
+      top: 5rem;
+      width: 100%;
+    }
+  }
+</style>

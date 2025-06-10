@@ -1,9 +1,10 @@
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
 import type { LangKey } from '@i18n/utils'
 
-type CollectionType = 'projects'
-
-export const getCollectionByLang = async (collectionName: CollectionType, lang: LangKey) => {
+export const getCollectionByLang = async <T extends 'projects' | 'blog'>(
+  collectionName: T,
+  lang: LangKey,
+): Promise<CollectionEntry<T>[]> => {
   const collection = await getCollection(collectionName)
-  return collection.filter((project) => project.id.includes(`${lang}/`))
+  return collection.filter((data) => data.id.includes(`${lang}/`))
 }

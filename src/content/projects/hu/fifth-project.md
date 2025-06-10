@@ -4,7 +4,7 @@ title: Ötödik Projekt
 description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto soluta distinctio et voluptas ipsum tempora est amet, nisi reprehenderit.
 demoUrl: 'https://github.com/TamasSallai'
 githubUrl: 'https://github.com/TamasSallai'
-pubDate: '2024-11-03'
+pubDate: '2025-06-03'
 author:
   {
     firstName: 'Tamás',
