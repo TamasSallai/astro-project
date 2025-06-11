@@ -20,7 +20,9 @@ const validateRecaptcha = async (token: string) => {
 
     const data = await response.json()
     return data.success && data.score >= 0.5
-  } catch (error) {}
+  } catch (error) {
+    return false
+  }
 }
 
 export const POST: APIRoute = async ({ request }) => {
