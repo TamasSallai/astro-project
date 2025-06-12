@@ -61,6 +61,7 @@ export const ui = {
     'contact-form.company.placeholder': 'Are you representing a company?',
     'contact-form.message.label': 'Message',
     'contact-form.message.placeholder': 'Tell me how can i help you.',
+    'contact-form.message.error.required': 'Please enter a message so I know how I can help you.',
     'contact-form.submit': 'Send',
     'contact-form.success': "Thanks for reaching out! I'll be in touch shortly.",
     'contact-form.error': `An unexpected error occurred. Please contact me directly at ${email}`,
@@ -140,6 +141,8 @@ export const ui = {
     'contact-form.company.placeholder': 'Egy céget képviselsz?',
     'contact-form.message.label': 'Üzenet',
     'contact-form.message.placeholder': 'Mondd el, miben segíthetek.',
+    'contact-form.message.error.required':
+      'Kérlek írj egy üzenetet, hogy megtudjam, hogyan segíthetek.',
     'contact-form.submit': 'Küldés',
     'contact-form.success': 'Köszönöm, hogy felvette velem a kapcsolatot! Hamarosan jelentkezem.',
     'contact-form.error': `Váratlan hiba történt. Kérem írjon közvetlenül a ${email} email címre.`,

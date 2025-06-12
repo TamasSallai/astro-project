@@ -117,7 +117,7 @@ const ContactForm = ({ lang }: Props) => {
         required
         placeholder={t('contact-form.message.placeholder')}
         registerProps={register('message', {
-          required: true,
+          required: t('contact-form.message.error.required'),
         })}
         fieldError={errors.message}
       />
