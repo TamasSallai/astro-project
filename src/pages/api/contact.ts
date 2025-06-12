@@ -42,7 +42,7 @@ const sendEmail = async (formData: IContactFormData) => {
     ],
     subject: `Kapcsolat felvétel, ${formData.name}`,
     htmlContent: `
-      <h3>Új üzenet</h3>
+      <h3>Új Üzenet</h3>
       <p><strong>Név:</strong> ${formData.name}</p>
       <p><strong>Email:</strong> ${formData.email}</p>
       ${formData.phone ? `<p><strong>Telefon:</strong> ${formData.phone}</p>` : ''}
