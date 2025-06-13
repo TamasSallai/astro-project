@@ -1,4 +1,3 @@
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import type { UILangKey } from './utils'
 
 export const languages = {
@@ -7,8 +6,6 @@ export const languages = {
 } as const
 
 export const defaultLang = 'hu'
-
-const EnglishBlogUrl = getRelativeLocaleUrl('en', '/blog')
 
 const email = import.meta.env.PUBLIC_EMAIL
 
@@ -96,7 +93,6 @@ export const ui = {
       'In addition to my own projects and full-time work, I collaborate with my friends at the <strong class="clr-primary-500">SitePro</strong> team.',
     'about-section.collab.p3':
       'In my work, i build responsive, user-friendly and modern websites and web solutions based on figma designs. I also handle website optimization, develop new features, and take care of maintenance tasks.',
-    'about-section.collab.p4': `If you intrested in the projects I worked on with SitePro, feel free to <a class="link" href=${EnglishBlogUrl}>check out my blog post about it!</strong>`,
   },
   hu: {
     // Navigation
@@ -182,8 +178,6 @@ export const ui = {
       'A saját projektjeim és főállású munkám mellett együttműködöm barátaimmal, a <strong class="clr-primary-500">SitePro</strong> csapatával.',
     'about-section.collab.p3':
       'A munkám során kész figma designok alapján készítek <strong class="clr-primary-500">reszponzív, felhasználóbarát és technológiailag korszerű</strong> weboldalakat, webes megoldásokat. Ezen kívül foglalkozom még weblapoptimalizálással, új funkciók fejlesztésével és karbantartási feladatokkal.',
-    'about-section.collab.p4':
-      'Ha kíváncsi milyen projekteken dolgoztam együtt a SitePro-val, akkor <a class="link" href="/blog">olvasd el az erről szóló blog cikkemet!</a>',
   },
 } as const
 
