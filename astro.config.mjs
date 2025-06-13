@@ -5,7 +5,7 @@ import icon from 'astro-icon'
 import sectionize from '@hbsnow/rehype-sectionize'
 
 import react from '@astrojs/react'
-import node from '@astrojs/node'
+import cloudflare from '@astrojs/cloudflare'
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,9 +13,7 @@ export default defineConfig({
   site: 'https://example.com',
 
   output: 'server',
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: cloudflare(),
 
   i18n: {
     locales: ['hu', 'en'],
