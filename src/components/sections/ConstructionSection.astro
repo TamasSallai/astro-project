@@ -1,0 +1,70 @@
+---
+import { Icon } from 'astro-icon/components'
+import { useTranslations, type LangKey } from '@i18n/utils'
+
+const lang = Astro.currentLocale as LangKey
+const t = useTranslations(lang)
+---
+
+<section class="construction-section">
+  <div class="container">
+    <div class="construction-banner">
+      <h2 class="construction-heading | heading-3">{t('construction-section.title')}</h2>
+      <p class="construction-description">
+        {t('construction-section.description')}
+      </p>
+
+      <div class="construction-actions">
+        <a
+          href="https://github.com/yourusername/your-repo"
+          class="button button--github"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t('construction-section.action')}
+          <Icon name="github" size={18} />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .construction-section {
+    padding-block: 2rem;
+  }
+
+  .construction-banner {
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--clr-primary-600), var(--clr-primary-500));
+    border-radius: var(--rounded-lg);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  .construction-heading {
+    color: var(--clr-neutral-100);
+  }
+
+  .construction-description {
+    margin-top: 1.25rem;
+    font-family: var(--ff-base);
+    font-size: var(--fs-300);
+    color: var(--clr-neutral-100);
+  }
+
+  .construction-actions {
+    margin-top: 1.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .construction-banner {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+</style>

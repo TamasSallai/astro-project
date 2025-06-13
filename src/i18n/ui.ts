@@ -41,6 +41,12 @@ export const ui = {
     'blog-section.header.description':
       'Read my latest articles about development, technology, and more.',
 
+    // Construction Section
+    'construction-section.title': '🚧 Site Under Development',
+    'construction-section.description':
+      "Hey there! 👋 Thanks for stopping by! This portfolio website is actively under development. While not everything is finished yet, feel free to browse around and if you're curious about the technical implementation, check out the source code on GitHub. 🚀",
+    'construction-section.action': 'View Source Code',
+
     // Contact Section
     'contact-section.heading': "Let's Connect!",
     'contact-section.description':
@@ -119,6 +125,12 @@ export const ui = {
     'blog-section.header.title': 'Szakmai cikkeim',
     'blog-section.header.description':
       'Olvasd el legutóbbi cikkeimet fejlesztésről, technológiáról és egyebekről.',
+
+    // Construction Section
+    'construction-section.title': '🚧 Az oldal fejlesztés alatt áll',
+    'construction-section.description':
+      'Szia, 👋 örülök hogy itt vagy! Ez a portfólió honlap aktív fejlesztés alatt áll. Bár még nincs minden kész, nyugodtan böngész az oldalon és ha érdekel a technikai megvalósítása, csekkold a forráskódot a GitHub-on. 🚀',
+    'construction-section.action': 'Forráskód megtekintése',
 
     // Contact Section
     'contact-section.heading': 'Lépjünk kapcsolatba!',
