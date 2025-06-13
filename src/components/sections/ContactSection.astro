@@ -1,7 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { useTranslations, type LangKey } from '@i18n/utils'
-import ContactForm from '@components/ui/ContactForm.astro'
 import ReactContactForm from '@components/ui/ContactForm/ContactForm.tsx'
 
 const email = import.meta.env.PUBLIC_EMAIL
@@ -40,7 +39,6 @@ const t = useTranslations(lang)
         </ul>
       </div>
       <div>
-        <!-- <ContactForm /> -->
         <ReactContactForm lang={lang} client:load />
       </div>
     </div>
