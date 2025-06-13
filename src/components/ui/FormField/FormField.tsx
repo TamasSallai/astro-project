@@ -29,7 +29,7 @@ const FormField = ({
         <textarea
           className="form-field__input"
           id={id}
-          required={required}
+          // required={required}
           placeholder={placeholder}
           {...registerProps}
           aria-invalid={fieldError ? true : false}
@@ -40,7 +40,7 @@ const FormField = ({
           className="form-field__input"
           type={type}
           id={id}
-          required={required}
+          // required={required}
           placeholder={placeholder}
           {...registerProps}
           aria-invalid={fieldError ? true : false}
