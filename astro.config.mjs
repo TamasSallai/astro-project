@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config'
+import { defineConfig, passthroughImageService } from 'astro/config'
 
 import icon from 'astro-icon'
 import sectionize from '@hbsnow/rehype-sectionize'
@@ -13,7 +13,14 @@ export default defineConfig({
   site: 'https://example.com',
 
   output: 'server',
-  adapter: cloudflare(),
+
+  image: {
+    service: passthroughImageService(),
+  },
+
+  adapter: cloudflare({
+    imageService: 'passthrough',
+  }),
 
   i18n: {
     locales: ['hu', 'en'],

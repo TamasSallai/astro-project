@@ -1,15 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "my-astro-app",
+  "name": "portfolio-website",
   "main": "./dist/_worker.js/index.js",
-  // Update to today's date
   "compatibility_date": "2025-06-13",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "binding": "ASSETS",
-    "directory": "./dist",
+    "directory": "./dist"
   },
   "observability": {
-    "enabled": true,
-  },
+    "enabled": true
+  }
 }
