@@ -44,4 +44,15 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
   <!-- Scripts -->
   <!-- <script src="../utils/animateOnObserve.ts"></script> -->
   <script is:inline src=`https://www.google.com/recaptcha/api.js?render=${siteKey}`></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-2G46RX3YDY"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+    gtag('config', 'G-2G46RX3YDY')
+  </script>
 </head>
